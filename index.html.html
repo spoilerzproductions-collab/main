@@ -53,9 +53,7 @@
     gap: 0.75rem;
     text-decoration: none;
   }
-  .nav-hex {
-    width: 32px; height: 32px;
-  }
+  .nav-hex { width: 32px; height: 32px; }
   .nav-brand {
     font-family: 'Bebas Neue', sans-serif;
     font-size: 1.35rem;
@@ -63,11 +61,7 @@
     color: var(--white);
   }
   .nav-brand span { color: var(--red); }
-  .nav-links {
-    display: flex;
-    gap: 2rem;
-    list-style: none;
-  }
+  .nav-links { display: flex; gap: 2rem; list-style: none; }
   .nav-links a {
     font-size: 0.78rem;
     letter-spacing: 0.15em;
@@ -304,17 +298,8 @@
     margin-bottom: 1.25rem;
   }
   .svc-icon svg { width: 24px; height: 24px; stroke: var(--red); fill: none; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
-  .svc-title {
-    font-size: 1.1rem;
-    font-weight: 500;
-    color: var(--white);
-    margin-bottom: 0.6rem;
-  }
-  .svc-desc {
-    font-size: 0.88rem;
-    color: var(--muted);
-    line-height: 1.7;
-  }
+  .svc-title { font-size: 1.1rem; font-weight: 500; color: var(--white); margin-bottom: 0.6rem; }
+  .svc-desc { font-size: 0.88rem; color: var(--muted); line-height: 1.7; }
   .svc-list {
     margin-top: 1rem;
     list-style: none;
@@ -415,24 +400,13 @@
     line-height: 1;
     margin-bottom: 1rem;
   }
-  .step-title {
-    font-size: 0.95rem;
-    font-weight: 500;
-    color: var(--white);
-    margin-bottom: 0.5rem;
-  }
-  .step-desc {
-    font-size: 0.8rem;
-    color: var(--muted);
-    line-height: 1.6;
-  }
+  .step-title { font-size: 0.95rem; font-weight: 500; color: var(--white); margin-bottom: 0.5rem; }
+  .step-desc { font-size: 0.8rem; color: var(--muted); line-height: 1.6; }
   .step-arrow {
     position: absolute;
-    top: 50%;
-    right: -10px;
+    top: 50%; right: -10px;
     transform: translateY(-50%);
-    width: 20px;
-    height: 20px;
+    width: 20px; height: 20px;
     background: var(--bg);
     border: 1px solid var(--line);
     border-radius: 50%;
@@ -496,34 +470,66 @@
     color: var(--muted);
     margin-bottom: 0.2rem;
   }
-  .contact-card-value {
-    font-size: 0.9rem;
+  .contact-card-value { font-size: 0.9rem; font-weight: 400; color: rgba(255,255,255,0.85); }
+  .contact-card-arrow { margin-left: auto; color: var(--red); opacity: 0.5; font-size: 1.2rem; }
+
+  /* ── SOCIAL DIVIDER ── */
+  .social-divider {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin: 0.5rem 0;
+  }
+  .social-divider-line {
+    flex: 1;
+    height: 1px;
+    background: var(--line);
+  }
+  .social-divider-label {
+    font-size: 0.65rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.2);
+  }
+
+  /* ── SOCIAL BUTTONS ── */
+  .social-row {
+    display: flex;
+    gap: 0.65rem;
+  }
+  .social-btn {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.55rem;
+    padding: 0.75rem 0.5rem;
+    background: var(--surface2);
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    text-decoration: none;
+    color: var(--muted);
+    font-size: 0.78rem;
+    letter-spacing: 0.06em;
     font-weight: 400;
-    color: rgba(255,255,255,0.85);
+    transition: border-color 0.2s, color 0.2s, transform 0.2s;
   }
-  .contact-card-arrow {
-    margin-left: auto;
-    color: var(--red);
-    opacity: 0.5;
-    font-size: 1.2rem;
+  .social-btn:hover {
+    border-color: var(--red-border);
+    color: var(--white);
+    transform: translateY(-2px);
   }
+  .social-btn svg { width: 16px; height: 16px; fill: currentColor; flex-shrink: 0; }
 
   /* ── FOOTER ── */
   footer {
     background: var(--bg);
     border-top: 1px solid var(--line);
-    padding: 2rem 3rem;
+    padding: 1.5rem 3rem;
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    justify-content: center;
   }
-  .footer-brand {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 1rem;
-    letter-spacing: 0.1em;
-    color: rgba(255,255,255,0.2);
-  }
-  .footer-brand span { color: rgba(208,0,10,0.45); }
   .footer-copy {
     font-size: 0.72rem;
     color: rgba(255,255,255,0.2);
@@ -550,7 +556,8 @@
     .portfolio-item:first-child { grid-column: span 1; aspect-ratio: 4/3; }
     .steps-grid { grid-template-columns: 1fr 1fr; }
     .step-arrow { display: none; }
-    footer { flex-direction: column; gap: 0.5rem; text-align: center; }
+    footer { padding: 1.5rem; }
+    .social-row { flex-direction: column; }
   }
 </style>
 </head>
@@ -685,37 +692,26 @@
       </div>
     </div>
     <div class="portfolio-grid">
-
-      <!-- ITEM 1 (wide) — replace src with your image filename -->
       <div class="portfolio-item">
         <img src="portfolio/image1.jpg" alt="Video Edit">
         <div class="portfolio-overlay"><span class="portfolio-label">Video Edit</span></div>
       </div>
-
-      <!-- ITEM 2 — replace src with your image filename -->
       <div class="portfolio-item">
         <img src="portfolio/image2.jpg" alt="Branding">
         <div class="portfolio-overlay"><span class="portfolio-label">Branding</span></div>
       </div>
-
-      <!-- ITEM 3 — replace src with your image filename -->
       <div class="portfolio-item">
         <img src="portfolio/image3.jpg" alt="Graphic Design">
         <div class="portfolio-overlay"><span class="portfolio-label">Graphic Design</span></div>
       </div>
-
-      <!-- ITEM 4 — replace src with your image filename -->
       <div class="portfolio-item">
         <img src="portfolio/image4.jpg" alt="Social Media">
         <div class="portfolio-overlay"><span class="portfolio-label">Social Media</span></div>
       </div>
-
-      <!-- ITEM 5 — replace src with your image filename -->
       <div class="portfolio-item">
         <img src="portfolio/image5.jpg" alt="Logo Design">
         <div class="portfolio-overlay"><span class="portfolio-label">Logo Design</span></div>
       </div>
-
     </div>
   </div>
 </section>
@@ -804,6 +800,30 @@
           </div>
           <span class="contact-card-arrow">→</span>
         </a>
+
+        <!-- SOCIAL DIVIDER -->
+        <div class="social-divider">
+          <div class="social-divider-line"></div>
+          <span class="social-divider-label">Follow Me</span>
+          <div class="social-divider-line"></div>
+        </div>
+
+        <!-- SOCIAL BUTTONS -->
+        <div class="social-row">
+          <a class="social-btn" href="https://www.instagram.com/spoilerz_productions/" target="_blank">
+            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+            Instagram
+          </a>
+          <a class="social-btn" href="https://www.tiktok.com/@spoilerz.productions?_r=1&_t=ZS-96okeipGmsH" target="_blank">
+            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 00-.79-.05 6.34 6.34 0 00-6.34 6.34 6.34 6.34 0 006.34 6.34 6.34 6.34 0 006.33-6.34V8.69a8.16 8.16 0 004.77 1.52V6.76a4.85 4.85 0 01-1-.07z"/></svg>
+            TikTok
+          </a>
+          <a class="social-btn" href="https://www.facebook.com/share/1DTXyuee8P/" target="_blank">
+            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+            Facebook
+          </a>
+        </div>
+
       </div>
     </div>
   </div>
@@ -811,7 +831,6 @@
 
 <!-- FOOTER -->
 <footer>
-  <div class="footer-brand"><span>S</span>POILERZ PRODUCTIONS</div>
   <div class="footer-copy">© 2025 Spoilerz Productions · Sri Lanka · All rights reserved</div>
 </footer>
 
@@ -836,10 +855,10 @@
     });
   }, { threshold: 0.1 });
 
-  document.querySelectorAll('.service-card, .step, .stat-card, .contact-card, .portfolio-item').forEach(el => {
+  document.querySelectorAll('.service-card, .step, .stat-card, .contact-card, .portfolio-item, .social-btn').forEach(el => {
     el.style.opacity = '0';
     el.style.transform = 'translateY(20px)';
-    el.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+    el.style.transition = 'opacity 0.5s ease, transform 0.5s ease, border-color 0.2s, color 0.2s';
     observer.observe(el);
   });
 </script>
