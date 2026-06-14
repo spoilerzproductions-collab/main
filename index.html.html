@@ -1,4 +1,4 @@
-  <!DOCTYPE html>
+<!DOCTYPE html>
   <html lang="en">
   <head>
   <meta charset="UTF-8">
@@ -377,39 +377,17 @@
 
     /* ── YOUTUBE EMBED ── */
     .portfolio-item--video { background: #000; }
-    .yt-thumb-wrap {
-      width: 100%; height: 100%;
-      position: relative;
-      cursor: pointer;
-    }
-    .yt-thumb-wrap img {
-      width: 100%; height: 100%;
-      object-fit: cover;
-      display: block;
-      transition: transform 0.4s ease;
-    }
-    .portfolio-item--video:hover .yt-thumb-wrap img { transform: scale(1.04); }
-    .yt-play-btn {
+    .yt-play-overlay {
       position: absolute;
       top: 50%; left: 50%;
       transform: translate(-50%, -50%);
-      background: none;
-      border: none;
-      cursor: pointer;
-      width: 68px; height: 48px;
-      opacity: 0.9;
+      opacity: 0.85;
       transition: opacity 0.2s, transform 0.2s;
-      filter: drop-shadow(0 2px 8px rgba(0,0,0,0.6));
+      pointer-events: none;
     }
-    .yt-play-btn:hover { opacity: 1; transform: translate(-50%, -50%) scale(1.1); }
-    .yt-iframe-wrap {
-      position: absolute;
-      inset: 0;
-    }
-    .yt-loading {
-      width: 100%; height: 100%;
-      display: flex; align-items: center; justify-content: center;
-      color: var(--muted); font-size: 0.8rem; letter-spacing: 0.1em;
+    .portfolio-item--video:hover .yt-play-overlay {
+      opacity: 1;
+      transform: translate(-50%, -50%) scale(1.1);
     }
 
     /* ── HOW IT WORKS ── */
@@ -729,24 +707,16 @@
         </div>
       </div>
       <div class="portfolio-grid">
-        <div class="portfolio-item portfolio-item--video" id="yt-portfolio-item">
-          <!-- YouTube latest video loads via JS below -->
-          <div class="yt-thumb-wrap" id="yt-thumb-wrap">
-            <img id="yt-thumb" src="" alt="Latest YouTube Video" loading="lazy">
-            <button class="yt-play-btn" id="yt-play-btn" aria-label="Play video">
-              <svg viewBox="0 0 68 48" xmlns="http://www.w3.org/2000/svg">
-                <path d="M66.52,7.74C65.69,4.6,63.17,2.09,60.02,1.26C54.77,0,34,0,34,0S13.23,0,7.98,1.26C4.84,2.09,2.32,4.6,1.48,7.74C0,13.01,0,24,0,24s0,10.99,1.48,16.26c0.83,3.15,3.35,5.66,6.5,6.49C13.23,48,34,48,34,48s20.77,0,26.02-1.25c3.15-0.83,5.66-3.34,6.5-6.49C68,34.99,68,24,68,24S68,13.01,66.52,7.74z" fill="#ff0000"/>
-                <path d="M 45,24 27,14 27,34" fill="#fff"/>
-              </svg>
-            </button>
-          </div>
-          <div class="yt-iframe-wrap" id="yt-iframe-wrap" style="display:none;">
-            <iframe id="yt-iframe" src="" frameborder="0" allowfullscreen
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-              style="width:100%;height:100%;position:absolute;top:0;left:0;border:0;"></iframe>
+        <a class="portfolio-item portfolio-item--video" href="https://youtube.com/@spoilerzproductions" target="_blank" style="display:block;text-decoration:none;">
+          <img src="https://i.ytimg.com/vi/ZKnAvxmFaeM/hqdefault.jpg" alt="Latest Video" style="position:absolute;top:0;left:0;width:100%;height:100%;object-fit:cover;">
+          <div class="yt-play-overlay">
+            <svg viewBox="0 0 68 48" width="60" height="42">
+              <path d="M66.52,7.74C65.69,4.6,63.17,2.09,60.02,1.26C54.77,0,34,0,34,0S13.23,0,7.98,1.26C4.84,2.09,2.32,4.6,1.48,7.74C0,13.01,0,24,0,24s0,10.99,1.48,16.26c0.83,3.15,3.35,5.66,6.5,6.49C13.23,48,34,48,34,48s20.77,0,26.02-1.25c3.15-0.83,5.66-3.34,6.5-6.49C68,34.99,68,24,68,24S68,13.01,66.52,7.74z" fill="#ff0000"/>
+              <path d="M 45,24 27,14 27,34" fill="#fff"/>
+            </svg>
           </div>
           <div class="portfolio-overlay"><span class="portfolio-label">Video Edit</span></div>
-        </div>
+        </a>
         <div class="portfolio-item">
           <img src="portfolio/image2.jpg" alt="Branding">
           <div class="portfolio-overlay"><span class="portfolio-label">Branding</span></div>
@@ -889,102 +859,7 @@
     <div class="footer-copy">© 2025 Spoilerz Productions · Sri Lanka · All rights reserved</div>
   </footer>
 
-  <script>
-    /* ── YOUTUBE LATEST VIDEO ── */
-    (async function() {
-      const CHANNEL_ID = 'UCXrxqNyPgEsAc3uf9zSjxWA';
-      const RSS_URL    = `https://www.youtube.com/feeds/videos.xml?channel_id=${CHANNEL_ID}`;
-      const thumbWrap  = document.getElementById('yt-thumb-wrap');
-      const thumbImg   = document.getElementById('yt-thumb');
-      const playBtn    = document.getElementById('yt-play-btn');
-      const iframeWrap = document.getElementById('yt-iframe-wrap');
-      const iframe     = document.getElementById('yt-iframe');
 
-      // Multiple CORS proxies to try in order
-      const proxies = [
-        url => `https://api.allorigins.win/get?url=${encodeURIComponent(url)}`,
-        url => `https://corsproxy.io/?${encodeURIComponent(url)}`,
-        url => `https://api.codetabs.com/v1/proxy?quest=${encodeURIComponent(url)}`,
-      ];
-
-      function parseVideoIdFromXML(text) {
-        const parser = new DOMParser();
-        const xml = parser.parseFromString(text, 'text/xml');
-        const entry = xml.querySelector('entry');
-        if (!entry) return null;
-        // Try yt:videoId tag first
-        const ytId = entry.querySelector('videoId');
-        if (ytId && ytId.textContent) return ytId.textContent.trim();
-        // Fallback: parse from <id>yt:video:VIDEOID</id>
-        const idEl = entry.querySelector('id');
-        if (idEl && idEl.textContent) {
-          const parts = idEl.textContent.split(':');
-          return parts[parts.length - 1].trim();
-        }
-        return null;
-      }
-
-      async function tryProxy(proxyFn) {
-        const res = await fetch(proxyFn(RSS_URL), { signal: AbortSignal.timeout(6000) });
-        if (!res.ok) throw new Error('Bad response: ' + res.status);
-        const text = await res.text();
-        // allorigins wraps in JSON; others return raw XML
-        let xmlText = text;
-        try {
-          const json = JSON.parse(text);
-          if (json.contents) xmlText = json.contents;
-        } catch(e) { /* raw XML, use as-is */ }
-        return parseVideoIdFromXML(xmlText);
-      }
-
-      function setupPlayer(videoId) {
-        thumbImg.src = `https://i.ytimg.com/vi/${videoId}/hqdefault.jpg`;
-        thumbImg.onerror = function() {
-          this.src = `https://i.ytimg.com/vi/${videoId}/mqdefault.jpg`;
-          this.onerror = null;
-        };
-
-        function launchPlayer(e) {
-          e.stopPropagation();
-          thumbWrap.style.display  = 'none';
-          iframeWrap.style.display = 'block';
-          iframe.src = `https://www.youtube.com/embed/${videoId}?autoplay=1&rel=0&modestbranding=1`;
-        }
-        playBtn.addEventListener('click', launchPlayer);
-        thumbWrap.addEventListener('click', launchPlayer);
-      }
-
-      function showChannelFallback() {
-        thumbWrap.innerHTML = `
-          <a href="https://youtube.com/@spoilerzproductions" target="_blank"
-             style="width:100%;height:100%;display:flex;flex-direction:column;align-items:center;
-                    justify-content:center;gap:0.75rem;color:var(--muted);text-decoration:none;">
-            <svg viewBox="0 0 68 48" width="54" height="38">
-              <path d="M66.52,7.74C65.69,4.6,63.17,2.09,60.02,1.26C54.77,0,34,0,34,0S13.23,0,7.98,1.26C4.84,2.09,2.32,4.6,1.48,7.74C0,13.01,0,24,0,24s0,10.99,1.48,16.26c0.83,3.15,3.35,5.66,6.5,6.49C13.23,48,34,48,34,48s20.77,0,26.02-1.25c3.15-0.83,5.66-3.34,6.5-6.49C68,34.99,68,24,68,24S68,13.01,66.52,7.74z" fill="#ff0000"/>
-              <path d="M 45,24 27,14 27,34" fill="#fff"/>
-            </svg>
-            <span style="font-size:0.78rem;letter-spacing:0.12em;text-transform:uppercase;">Watch on YouTube</span>
-          </a>`;
-      }
-
-      // Try each proxy in sequence
-      let videoId = null;
-      for (const proxyFn of proxies) {
-        try {
-          videoId = await tryProxy(proxyFn);
-          if (videoId) break;
-        } catch(e) {
-          // Try next proxy
-        }
-      }
-
-      if (videoId) {
-        setupPlayer(videoId);
-      } else {
-        showChannelFallback();
-      }
-    })();
-  </script>
 
   <script>
     document.querySelectorAll('a[href^="#"]').forEach(a => {
